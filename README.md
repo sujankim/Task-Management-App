@@ -1,61 +1,100 @@
 # 🧠 Task Manager API (Spring Boot)
 
-## ✅ Current Status: AUTH SYSTEM COMPLETE
+## ✅ CURRENT STATUS: PRODUCTION-LEVEL BACKEND READY
 
-JWT Authentication with role-based authorization is fully implemented.
-
----
-
-## 🔐 Implemented Features
-
-- User Registration & Login
-- JWT Token Generation & Validation
-- Role-based Authorization (USER / ADMIN)
-- Custom Security Filters
-- Exception Handling (401, 403, 409, 500)
-- Global Validation Handling
-- H2 Database (dev)
+✔ JWT Authentication + Role-based Authorization  
+✔ Task CRUD (User + Admin)  
+✔ Swagger OpenAPI Integrated  
+✔ Pagination & Filtering  
+✔ Data Seeding (dev profile)  
+✔ Exception Handling  
 
 ---
 
-## 🧠 Security Flow
+## 🚀 FEATURES
 
-1. User logs in → receives JWT
-2. JWT sent in Authorization header
-3. JwtAuthenticationFilter validates token
-4. SecurityContext is populated
-5. Role-based access enforced
+### 🔐 Authentication
+- JWT login/register
+- Role-based access (USER / ADMIN)
+
+### 📋 Task Module
+- Create Task (owner-bound)
+- Get user tasks (paginated)
+- Filter by status
+- Update task (owner-only)
+- Delete task (owner + admin)
+
+### 👑 Admin Features
+- View ALL tasks
+- Filter ALL tasks
+- Delete ANY task
+
+### 📄 API Documentation
+- Swagger UI enabled
 
 ---
 
-## 📡 Auth Endpoints
+## 📡 API ENDPOINTS
 
+### Auth
 POST /api/auth/register  
 POST /api/auth/login  
 GET /api/auth/me  
 
+### Tasks (USER)
+GET /api/tasks  
+GET /api/tasks/{id}  
+GET /api/tasks/status/{status}  
+POST /api/tasks  
+PUT /api/tasks/{id}  
+DELETE /api/tasks/{id}  
+
+### Admin
+GET /api/admin/tasks  
+GET /api/admin/tasks/status/{status}  
+DELETE /api/admin/tasks/{id}  
+
 ---
 
-## 📊 Progress
+## 📘 Swagger
+
+http://localhost:8080/swagger-ui.html
+
+Use Bearer token:
+Authorization: Bearer <token>
+
+---
+
+## 🧠 SECURITY FLOW
+
+1. Login → JWT token
+2. Send token in header
+3. Filter validates token
+4. SecurityContext set
+5. Access controlled via roles + ownership
+
+---
+
+## 📊 PROGRESS
 
 ### ✅ Phase 1 — Setup
-✔ Project initialized  
-✔ Package structure  
+✔ Completed
 
-### ✅ Phase 2 — Auth System
-✔ User entity + Role enum  
-✔ JWT Service  
-✔ AuthService  
-✔ SecurityConfig  
-✔ Filters  
+### ✅ Phase 2 — Auth
+✔ Completed
 
-### ⏳ Phase 3 — Task Module (NEXT)
-- Task Entity
-- Task CRUD
-- Ownership mapping
+### ✅ Phase 3 — Task Module
+✔ Entity with owner mapping
+✔ DTO + Mapper
+✔ Repository (user-scoped queries)
+✔ Service (secure logic)
+✔ Controller (Swagger documented)
+
+### ⏳ Phase 4 — Frontend
+NEXT
 
 ---
 
-## 🛠️ Run
+## 🛠️ RUN
 
 ./mvnw spring-boot:run

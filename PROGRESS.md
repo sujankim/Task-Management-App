@@ -4,6 +4,7 @@
 - JWT Authentication
 - Role-based security
 - Exception handling
+- Task module implementation
 
 ## 🔜 Next
-- Task module implementation
+- Angular task board UI module implementation
