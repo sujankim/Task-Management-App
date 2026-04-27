@@ -6,5 +6,3 @@
 - Exception handling
 - Task module implementation
 
-## 🔜 Next
-- Angular task board UI module implementation

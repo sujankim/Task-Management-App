@@ -1,100 +1,63 @@
-# 🧠 Task Manager API (Spring Boot)
+# 🧠 Task Manager Backend (Spring Boot)
 
-## ✅ CURRENT STATUS: PRODUCTION-LEVEL BACKEND READY
+![Spring Boot](https://img.shields.io/badge/SpringBoot-3.x-green)
+![JWT](https://img.shields.io/badge/JWT-Security-blue)
+![Hibernate](https://img.shields.io/badge/Hibernate-JPA-orange)
 
-✔ JWT Authentication + Role-based Authorization  
-✔ Task CRUD (User + Admin)  
-✔ Swagger OpenAPI Integrated  
-✔ Pagination & Filtering  
-✔ Data Seeding (dev profile)  
-✔ Exception Handling  
+## 📌 Overview
+Robust REST API for task management with authentication and role-based authorization.
 
----
+## 🚀 Features
+- JWT Authentication
+- Role-based Access Control
+- Task CRUD (User + Admin)
+- Exception Handling
+- DTO Mapping
 
-## 🚀 FEATURES
+## 🏗️ Architecture
 
-### 🔐 Authentication
-- JWT login/register
-- Role-based access (USER / ADMIN)
+```mermaid
+graph TD
+A[Controller] --> B[Service Layer]
+B --> C[Repository Layer]
+C --> D[(Database)]
 
-### 📋 Task Module
-- Create Task (owner-bound)
-- Get user tasks (paginated)
-- Filter by status
-- Update task (owner-only)
-- Delete task (owner + admin)
+B --> E[Security Context]
+B --> F[DTO Mapper]
+```
 
-### 👑 Admin Features
-- View ALL tasks
-- Filter ALL tasks
-- Delete ANY task
+## 🔐 Security
+- User can access only own tasks
+- Admin can access all tasks
 
-### 📄 API Documentation
-- Swagger UI enabled
+## 📂 Structure
+```
+controller/
+service/
+repository/
+model/
+dto/
+mapper/
+security/
+```
 
----
-
-## 📡 API ENDPOINTS
-
-### Auth
-POST /api/auth/register  
-POST /api/auth/login  
-GET /api/auth/me  
-
-### Tasks (USER)
-GET /api/tasks  
-GET /api/tasks/{id}  
-GET /api/tasks/status/{status}  
-POST /api/tasks  
-PUT /api/tasks/{id}  
-DELETE /api/tasks/{id}  
-
-### Admin
-GET /api/admin/tasks  
-GET /api/admin/tasks/status/{status}  
-DELETE /api/admin/tasks/{id}  
-
----
-
-## 📘 Swagger
-
-http://localhost:8080/swagger-ui.html
-
-Use Bearer token:
-Authorization: Bearer <token>
-
----
-
-## 🧠 SECURITY FLOW
-
-1. Login → JWT token
-2. Send token in header
-3. Filter validates token
-4. SecurityContext set
-5. Access controlled via roles + ownership
-
----
-
-## 📊 PROGRESS
-
-### ✅ Phase 1 — Setup
-✔ Completed
-
-### ✅ Phase 2 — Auth
-✔ Completed
-
-### ✅ Phase 3 — Task Module
-✔ Entity with owner mapping
-✔ DTO + Mapper
-✔ Repository (user-scoped queries)
-✔ Service (secure logic)
-✔ Controller (Swagger documented)
-
-### ⏳ Phase 4 — Frontend
-NEXT
-
----
-
-## 🛠️ RUN
-
+## ⚙️ Setup
+```bash
 ./mvnw spring-boot:run
+```
+
+## 🛠️ Dev Config
+- Hibernate Auto Update
+- SQL Logging Enabled
+
+## 📡 API Endpoints
+```
+GET /api/tasks
+POST /api/tasks
+PUT /api/tasks/{id}
+DELETE /api/tasks/{id}
+
+ADMIN:
+GET /api/admin/tasks
+DELETE /api/admin/tasks/{id}
+```

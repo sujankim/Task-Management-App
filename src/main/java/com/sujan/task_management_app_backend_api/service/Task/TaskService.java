@@ -13,6 +13,7 @@ import com.sujan.task_management_app_backend_api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -65,9 +66,16 @@ public class TaskService {
     // Get a single task by ID (owner only)
     public TaskResponseDTO getTaskById(Long taskId) {
         User currentUser = getCurrentUser();
-        Task task =  taskRepository.findByIdAndOwnerUsername(taskId,  currentUser.getUsername())
-                .orElseThrow(()-> new ResourceNotFoundException(
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResourceNotFoundException(
                         "Task not found with id: " + taskId));
+
+        // Allow access if the current user is either the task owner or an admin
+        if (!task.getOwner().getUsername().equals(currentUser.getUsername()) &&
+                currentUser.getAuthorities().stream()
+                        .noneMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+            throw new AccessDeniedException("You are not authorised to view this task");
+        }
         return taskMapper.toDTO(task);
     }
 
